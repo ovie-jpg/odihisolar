@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	
+<!-- molla/index.html  22 Nov 2019 09:54:33 GMT -->
+<head>
+		<script type="text/javascript">
+			if (top !== window) {
+				top.location.href = window.location.href;
+			}
+			if (window.location.hash) {
+				window.location.href = window.location.href.replace(window.location.hash, '');
+			}
+		</script>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>Odihi solartech Global</title>
+
+		<meta name="author" content="p-Themes">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="https://www.portotheme.com/html/molla/assets/images/demos-img/favicon.ico" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="../../../www.portotheme.com/html/molla/assets/images/demos-img/apple-touch-icon.html">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+		<!-- Web Fonts  -->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{% static 'lib/bootstrap/bootstrap.min.css' %}">
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="{% static 'assets/css/main.min.css' %}">
+
+	</head>
+	<body>
+		<div class="page-wrapper">
+			<header id="header">
+				<div class="container-lg">
+					<div class="header-left">
+						<a href="{% url 'home' %}" class="logo">
+                            <img src="{% static 'assets/images/demos-img/odihi-main.jpg' %}" alt="Molla Logo" width="105" height="25">
+                        </a>
+					</div>
+					<div class="header-main">
+						<ul class="menu">
+							<li>
+								<a href="{% url 'home' %}" class="">home</a>
+							</li>
+							
+						</ul>
+					</div>
+					
+				</div>
+			</header>
+			<div id="main">
+				<section class="banner section-dark" style="background: #2222222a;">
+					<img src="{% static 'assets/images/demos-img/odihi-logo.jpg' %}" alt="" width="1920" height="1120"
+				</section>
+				<section class="section section-demos text-center container-lg">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-section">
+                                <h2>Shopping Carts</h2>
+                            </div>
+                        </div>
+                    </div>
+                    {% if carts %}
+                    {% for cart in carts %}
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <div class="icon">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </div>
+                                <h2>{{cart.name}}</h2>
+                                <h4>List of items</h4>
+                                {% if cart.product.all %}
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in cart.product.all %}
+                                    <tr>
+                                        <th scope="row"><p>{{item.product}}</p></th>
+                                        <th><p>₦{{item.price}}</p></th>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr>
+                                    <th>Total:</th>
+                                    <th><p>₦{{total_price}}</p></th>
+                                    </tr>
+                                    <tr>
+                                    <th>Total commission:</th>
+                                    <th><p>₦{{total_com}}</p></th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary">pay now</button>
+                                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+                                    </form>
+                                </div>
+                                {% for message in messages %}
+                                <h1 style="color: red;">{{message}}</h1>
+                                {% endfor %}
+                                <br>
+                                <br>
+                                {% else %}
+                                <h9>No product added</h9>
+                                {% endif %}
+                                <a href="{% url 'delete-cart' cart.pk %}"><button class="btn btn-danger">Delete</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <div class="">
+                                    <i class="icon-shopping-cart"></i>
+                                </div>
+                                <h3 style="font-size: 35px; color: red;"><a href="{% url 'addcart' %}"> click to create your Shopping Cart</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </section>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+		<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+		<div class="mobile-menu-container">
+			<div class="mobile-menu-wrapper">
+				<span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+				<nav class="mobile-nav">
+					<ul class="mobile-menu">
+						<li>
+							<a href="{% url 'home' %}">Home</a>
+						</li>
+					</ul>
+				</nav><!-- End .mobile-nav -->
+
+				<!-- Vendor -->
+		<script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+		<script src="{% static 'lib/jquery.appear/jquery.appear.min.js' %}"></script>
+		<!--<script src="lib/popper/umd/popper.min.js"></script>-->
+		<script src="{% static 'lib/jquery.lazyload/jquery.lazyload.min.js' %}"></script>
+		<script src="{% static 'lib/isotope/jquery.isotope.min.js' %}"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="{% static 'assets/main.js' %}"></script>
+			</div><!-- End .mobile-menu-wrapper -->
+		</div><!-- End .mobile-menu-container -->
+    </body>
+</html>

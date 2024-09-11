@@ -1,0 +1,463 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dashboard</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'assets/images/icons/site.html' %}">
+    <link rel="mask-icon" href="{% static 'assets/images/icons/safari-pinned-tab.svg' %}" color="#666666">
+    <link rel="shortcut icon" href="{% static 'assets/images/icons/favicon.ico' %}">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="{% static 'assets/images/icons/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header class="header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                    
+
+
+                    </div><!-- End .header-left -->
+
+                    <div class="header-right">
+                        <ul class="top-menu">
+                            <li>
+                                <a href="#">Links</a>
+                                <ul>
+                                    <li><a href="{% url 'home' %}">Homepage</a></li>
+                                    {% if user.is_superuser %}
+                                    <li>
+                                        <a href="{% url 'add-bank' %}">Register a Bank</a>
+                                
+                                    </li>
+                                    {% endif %}
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="{% url 'edit-profile' profile.pk %}"><i class="fas fa-user fa-fw mr-2"></i>Edit profile <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="{% url 'reset-password' username=request.user.username %}"><i class="fas fa-user fa-fw mr-2"></i>change password <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+            
+                                </ul>
+                            </li>
+                        </ul><!-- End .top-menu -->
+                    </div><!-- End .header-right -->
+                </div><!-- End .container -->
+            </div><!-- End .header-top -->
+
+            <div class="header-middle sticky-header">
+                <div class="container">
+                    <div class="header-left">
+                        <button class="mobile-menu-toggler">
+                            <span class="sr-only">Toggle mobile menu</span>
+                            <i class="icon-bars"></i>
+                        </button>
+
+                        <a href="index.html" class="logo">
+                            <img src="{% static 'assets/images/demos-img/odihi-main.jpg' %}" alt="Molla Logo" width="105" height="25">
+                        </a>
+
+                        <nav class="main-nav">
+        
+                        </nav><!-- End .main-nav -->
+                    </div><!-- End .header-left -->
+
+                    <div class="header-right">
+
+                        
+                    </div><!-- End .header-right -->
+                </div><!-- End .container -->
+            </div><!-- End .header-middle -->
+        </header><!-- End .header -->
+
+        <main class="main">
+        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        		<div class="container">
+        			<h1 class="page-title">My Account<span>Shop</span></h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+            	<div class="dashboard">
+	                <div class="container">
+	                	<div class="row">
+	                		<aside class="col-md-4 col-lg-3">
+	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+								    <li class="nav-item">
+								        <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Dashboard</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" href="{% url 'trans-hist' %}" role="tab" aria-controls="" aria-selected="">Transacion History</a>
+								    </li>
+                                    <li class="nav-item">
+								        <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Bank Details</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adress</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Payment Authorization</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" href="#">Sign Out</a>
+								    </li>
+								</ul>
+	                		</aside><!-- End .col-lg-3 -->
+
+	                		<div class="col-md-8 col-lg-9">
+	                			<div class="tab-content">
+								    <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+								    	<section class="cta-section theme-bg-light py-5">
+                                            <div class="container text-center">
+                                                <h2 class="heading">Commission Earned: ₦{{profile.earnings}}</h2><br>
+                                                <div class="intro">Referred by- {{profile.rec_by}}</div><br>
+                                                <div class="intro">Referral code- {{profile.code}} (copy and share your link to earn. e.g www.odihisolar.com/{{profile.code}})</div><br>
+                                                <h2 class="heading">People you referred:-</h2>
+                                                {% for recs in profile.recommendations.all %}
+                                                <div class="intro">User- {{recs.username}}</div>
+                                                {% endfor %}
+                                            </div><!--//container-->
+                                        </section>
+                                        {% if user.is_superuser %}
+                                    <section class="cta-section theme-bg-light py-5">
+                                        <div class="container text-center">
+                                            <a href="{% url 'customer-info' %}"><button class="btn btn-primary">Print customer details</button></a>
+                                            <br>
+                                            <br>
+                                            <a class="nav-link" href="{% url 'add-email' %}"><button class="btn btn-primary">add email for order notifications</button></a>
+                                            <br>
+                                            <br>
+                                            <a class="nav-link" href="{% url 'add-whatsapp' %}"><button class="btn btn-primary">add whatsapp for order notifications</button></a>
+                                            <br>
+                                            <br>
+                                            <a class="nav-link" href="{% url 'send-mail' %}"><button class="btn btn-primary">Send email notification</button></a>
+                                            <br>
+                                            <br>
+                                            <a href="{% url 'profiles-details' %}"><button class="btn btn-primary">Pay Referrals using bulk transfer</button></a>
+                                            <br>
+                                            <br>
+                                            {% if reset is None %}
+                                            <a href="{% url 'add-reset' %}"><button class="btn btn-primary">Add reset url</button></a>
+                                            <br>
+                                            <br>
+                                            {% else %}
+                                            <a href="{% url 'edit-reset' reset.pk %}"><button class="btn btn-primary">edit reset url</button></a>
+                                            <br>
+                                            <br>
+                                            {% endif %}
+                                            {% if guide is None %}
+                                            <a href="{% url 'add-guide' %}"><button class="btn btn-primary">add a guide</button></a>
+                                            <br>
+                                            <br>
+                                            {% else %}
+                                            {% if guide.pk %}
+                                            <a href="{% url 'edit-guide' guide.pk %}"><button class="btn btn-primary">Edit guide</button></a>
+                                            <br>
+                                            <br>
+                                            {% endif %}
+                                            {% endif %}
+                                            {% if email_setup is None %}
+                                                <a class="nav-link" href="{% url 'email-setup' %}"><button class="btn btn-primary">configure your email</button></a>
+                                                <br>
+                                                <br>
+                                                {% else %}
+                                                <a class="nav-link" href="{% url 'emailsetup-edit' email_setup.pk %}"><button class="btn btn-primary">edit email configuration</button></a>
+                                                <br>
+                                                <br>
+                                            {% endif %}
+                                        </div>
+                                    </section>
+                                    {% endif %}
+								    </div><!-- .End .tab-pane -->
+
+                                    <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
+								    	<h1>BANK DETAILS</h1>
+                            {% if bank %}
+						    <div class="intro">Account Name: {{bank.account_name}}</div>
+                            <div class="intro">Account Number: {{bank.account_number}}</div>
+                            <div class="intro">Bank: {{bank.bank_name}}</div>
+                            <div class="intro">email attached: {{bank.email}}</div>
+                            {% if profile.earnings >= 1000 %}
+                            {% if permission.permissions == "Allowed" %}
+                            <form method="POST">
+                            {% csrf_token %}
+						    <button class="btn btn-primary">Withdraw</button>
+                            </form>
+                            <br>
+                            {% else %}
+                            <h5 style="color: red;">You will receive your earnings by the end of the week</h5>
+                            {% endif %}
+                            {% else %}
+                            <h5 style="color: red;">Earn at least ₦1000 to be able to withdraw</h5>
+                            <br>
+                            {% endif %}
+                            <a class="more-link" href="{% url 'bank-delete' bank.pk %}"><button class="btn btn-danger">Delete bank details</button></a>
+                            {% else %}
+                            <a href="{% url 'bank-details' %}"><small><p style="color: red;">Upload bank details to get paid</p></small></a>
+                            {% endif %}
+								    </div><!-- .End .tab-pane -->
+
+								    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+                                        {% if address == 'Add address for easy delivery of products' %}
+                                        <h1 style="color: red;"><a href="{% url 'add-location' %}">Click to add address for easy delivery</a></h1>
+                                        {% endif %}
+								    	{% if address != 'Add address for easy delivery of products' %}
+                                        <section class="blog-list px-3 py-5 p-md-5">
+                                            <div class="container">
+                                                <div class="item mb-5">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                        <h1>Address</h1>
+                                                            <div class="intro">{{address.location}}</div>
+                                                            
+                                        
+                                            </div>
+                                        </section>
+                                        {% endif %}
+								    </div><!-- .End .tab-pane -->
+
+								    <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+								    {% if user.is_superuser %}
+                                    <section class="cta-section theme-bg-light py-5">
+                                        <div class="container text-center">
+                                            <p>Allow Affiliates to withdraw directly: {{permission.permissions}}</p>
+                                            <br>
+                                            <br>
+                                            <a href="{% url 'permission' %}"><button class="btn btn-primary">Edit Permissions</button></a>
+                                            <br>
+                                            <br>
+                                        </div>
+                                    </section>
+                                    {% endif %}
+								    </div><!-- .End .tab-pane -->
+								</div>
+	                		</div><!-- End .col-lg-9 -->
+	                	</div><!-- End .row -->
+	                </div><!-- End .container -->
+                </div><!-- End .dashboard -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+        <footer class="footer">
+        	<div class="footer-middle">
+	            <div class="container">
+	            	<div class="row">
+	            		
+	            	</div><!-- End .row -->
+	            </div><!-- End .container -->
+	        </div><!-- End .footer-middle -->
+
+	        <div class="footer-bottom">
+	        	<div class="container">
+	        		<p class="footer-copyright">Copyright © 2024 Odihi Solartech Global. All Rights Reserved.</p><!-- End .footer-copyright -->
+	        		<figure class="footer-payments">
+	        			<img src="assets/images/payments.png" alt="Payment methods" width="272" height="20">
+	        		</figure><!-- End .footer-payments -->
+	        	</div><!-- End .container -->
+	        </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+            <form action="#" method="get" class="mobile-search">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Search in..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </form>
+            
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li class="active">
+                        <a href="{% url 'home' %}">Home</a>
+
+                    </li>
+                    <li>
+                        <a href="{% url 'edit-profile' profile.pk %}">Edit Profile</a>
+                
+                    </li>
+                    <li class="nav-item active">
+					    <a class="nav-link" href="{% url 'edit-profile' profile.pk %}"><i class="fas fa-user fa-fw mr-2"></i>Edit profile <span class="sr-only">(current)</span></a>
+					</li>
+                    <li class="nav-item active">
+					    <a class="nav-link" href="{% url 'reset-password' username=request.user.username %}"><i class="fas fa-user fa-fw mr-2"></i>change password <span class="sr-only">(current)</span></a>
+					</li>
+                </ul>
+            </nav><!-- End .mobile-nav -->
+
+            <div class="social-icons">
+                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+            </div><!-- End .social-icons -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    <!-- Sign in / Register Modal -->
+    <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+
+                    <div class="form-box">
+                        <div class="form-tab">
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Sign In</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Register</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="tab-content-5">
+                                <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <label for="singin-email">Username or email address *</label>
+                                            <input type="text" class="form-control" id="singin-email" name="singin-email" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="singin-password">Password *</label>
+                                            <input type="password" class="form-control" id="singin-password" name="singin-password" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>LOG IN</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="signin-remember">
+                                                <label class="custom-control-label" for="signin-remember">Remember Me</label>
+                                            </div><!-- End .custom-checkbox -->
+
+                                            <a href="#" class="forgot-link">Forgot Your Password?</a>
+                                        </div><!-- End .form-footer -->
+                                    </form>
+                                    <div class="form-choice">
+                                        <p class="text-center">or sign in with</p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login btn-g">
+                                                    <i class="icon-google"></i>
+                                                    Login With Google
+                                                </a>
+                                            </div><!-- End .col-6 -->
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login btn-f">
+                                                    <i class="icon-facebook-f"></i>
+                                                    Login With Facebook
+                                                </a>
+                                            </div><!-- End .col-6 -->
+                                        </div><!-- End .row -->
+                                    </div><!-- End .form-choice -->
+                                </div><!-- .End .tab-pane -->
+                                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <label for="register-email">Your email address *</label>
+                                            <input type="email" class="form-control" id="register-email" name="register-email" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="register-password">Password *</label>
+                                            <input type="password" class="form-control" id="register-password" name="register-password" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>SIGN UP</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="register-policy" required>
+                                                <label class="custom-control-label" for="register-policy">I agree to the <a href="#">privacy policy</a> *</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-footer -->
+                                    </form>
+                                    <div class="form-choice">
+                                        <p class="text-center">or sign in with</p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login btn-g">
+                                                    <i class="icon-google"></i>
+                                                    Login With Google
+                                                </a>
+                                            </div><!-- End .col-6 -->
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login  btn-f">
+                                                    <i class="icon-facebook-f"></i>
+                                                    Login With Facebook
+                                                </a>
+                                            </div><!-- End .col-6 -->
+                                        </div><!-- End .row -->
+                                    </div><!-- End .form-choice -->
+                                </div><!-- .End .tab-pane -->
+                            </div><!-- End .tab-content -->
+                        </div><!-- End .form-tab -->
+                    </div><!-- End .form-box -->
+                </div><!-- End .modal-body -->
+            </div><!-- End .modal-content -->
+        </div><!-- End .modal-dialog -->
+    </div><!-- End .modal -->
+
+    <!-- Plugins JS File -->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.hoverIntent.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/superfish.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <!-- Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+</html>
